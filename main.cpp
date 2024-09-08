@@ -12,11 +12,11 @@ int main()
 	mr.open_mnist("C:\\Users\\seye1\\OneDrive\\Documents\\Research\\ML Architecture\\FrameworkFiles\\MNIST\\archive\\train-images.idx3-ubyte",
 				  "C:\\Users\\seye1\\OneDrive\\Documents\\Research\\ML Architecture\\FrameworkFiles\\MNIST\\archive\\train-labels.idx1-ubyte");
 	NN_test my_nn;
-	nn_optimizer opti(0.02,0.025, (float)log(0.99),(float)log(0.99));
+	nn_optimizer opti(0.001,0.0015, (float)0.5,(float)0.5);
 	
 
 	int batch_size = 32;
-	int num_epochs = 100;
+	int num_epochs = 40;
 	int num_epochs_update = 10;
 
 	float curr_alpha;
@@ -25,7 +25,7 @@ int main()
 
 	for (int q = 0; q < num_epochs; q++)
 	{
-		//auto old_duration = chrono::round<chrono::milliseconds>(chrono::duration<double>{1000});
+		auto old_duration = chrono::round<chrono::milliseconds>(chrono::duration<double>{1000});
 		while (mr.check_batching() == false)
 		{
 			matrix* batch = mr.get_batch(batch_size);
@@ -36,16 +36,16 @@ int main()
 				
 				curr_alpha = opti.get_current_alpha();
 				curr_beta = opti.get_current_beta();
-				//auto beg = chrono::high_resolution_clock::now();
+				auto beg = chrono::high_resolution_clock::now();
 				my_nn.train(*batch, *y_bs, curr_alpha, curr_beta);
-				//auto end = chrono::high_resolution_clock::now();
+				auto end = chrono::high_resolution_clock::now();
 
-				/*auto duration = chrono::duration_cast<chrono::milliseconds>(end - beg);
+				auto duration = chrono::duration_cast<chrono::milliseconds>(end - beg);
 				if (duration < old_duration)
 				{
 					old_duration = duration;
 					cout << "Minimum elapsed time: " << duration.count() << endl;
-				}*/
+				}
 				
 
 				

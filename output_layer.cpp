@@ -6,12 +6,14 @@ matrix column_softmax(matrix m) //softmaxes each row
 	int cs = m.get_columns();
 
 	float* col_sums = new float[cs];
+	float* check = new float[cs];
 	matrix output;
 	output.set_dims(rs, cs);
 
 	for (int j = 0; j < cs; j++)
 	{
 		col_sums[j] = 0;
+		check[j] = 0;
 	}
 	for (int i = 0; i < rs; i++)
 	{
@@ -25,9 +27,45 @@ matrix column_softmax(matrix m) //softmaxes each row
 	{
 		for (int j = 0; j < cs; j++)
 		{
-			output.set_data(i, j, (float)(exp(m.get_data(i, j) / col_sums[j])));
+			float o_data = (float)(exp(m.get_data(i, j)) / col_sums[j]);
+			output.set_data(i, j,o_data);
 		}
 	}
+
+
+
+	//DEBUG CODE
+	/*for (int i = 0; i < rs; i++)
+	{
+		for (int j = 0; j < cs; j++)
+		{
+			check[j] = check[j] + (float)output.get_data(i, j);
+		}
+	}
+
+	for (int i = 0; i < rs; i++)
+	{
+		std::cout << std::endl;
+		std::cout << "Row-" << i << " ";
+
+		for (int j = 0; j < cs; j++)
+		{
+			std::cout << output.get_data(i, j) << " ";
+		}
+
+		
+
+
+	}
+	std::cout << std::endl;
+
+	for (int j = 0; j < cs; j++)
+	{
+		std::cout << check[j] << " ";
+	}
+
+	std::cout << std::endl;
+	*/
 
 	delete[] col_sums;
 	return output;
