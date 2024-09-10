@@ -2,11 +2,11 @@
 NN_test::NN_test()
 {
 	input1 = new input_layer(784, 784);
-	lin_layer = new linear_layer(784, 300, true, false);
-	act_layer = new activation_layer(300, 300, act_function_type::Leaky_ReLU);
-	lin_layer2 = new linear_layer(300, 300, true, false);
-	act_layer2 = new activation_layer(300, 300, act_function_type::Hard_Tanh);
-	lin_layer3 = new linear_layer(300, 10, true, false);
+	lin_layer = new linear_layer(784, 1500, true, false);
+	act_layer = new activation_layer(1500, 1500, act_function_type::Leaky_ReLU);
+	lin_layer2 = new linear_layer(1500, 1000, true, false);
+	act_layer2 = new activation_layer(1000, 1000, act_function_type::Hard_Tanh);
+	lin_layer3 = new linear_layer(1000, 10, true, false);
 
 	output1 = new output_layer(10, 10, loss_function_type::Cross_Entropy);
 

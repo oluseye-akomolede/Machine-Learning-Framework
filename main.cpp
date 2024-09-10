@@ -12,11 +12,11 @@ int main()
 	mr.open_mnist("C:\\Users\\seye1\\OneDrive\\Documents\\Research\\ML Architecture\\FrameworkFiles\\MNIST\\archive\\train-images.idx3-ubyte",
 				  "C:\\Users\\seye1\\OneDrive\\Documents\\Research\\ML Architecture\\FrameworkFiles\\MNIST\\archive\\train-labels.idx1-ubyte");
 	NN_test my_nn;
-	nn_optimizer opti(0.001,0.0015, (float)0.5,(float)0.5);
+	nn_optimizer opti(0.0035,0.0055, (float)0.5,(float)0.5);
 	
 
 	int batch_size = 32;
-	int num_epochs = 40;
+	int num_epochs = 34;
 	int num_epochs_update = 10;
 
 	float curr_alpha;
@@ -62,6 +62,9 @@ int main()
 		{
 			matrix* batch = mr.get_batch(100);
 			matrix* y_bs = mr.get_label_batch(100);
+
+			
+			mr.get_random_batch(100, batch, y_bs);
 			float pred_rate = my_nn.evaluate(*batch, *y_bs);
 			cout << "Iteration: " << q << endl << "Training data prediction rate: " << pred_rate << endl;
 

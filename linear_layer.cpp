@@ -16,7 +16,7 @@ linear_layer::linear_layer(int num_inputs, int num_outputs, bool in_bias, bool i
 	
 
 	std::default_random_engine generator;
-	std::normal_distribution<float> distribution(0.0, 1.0);
+	std::normal_distribution<float> distribution(0.0, 0.05);
 	if (bias == true)
 	{
 		weights.set_dims(output_size, input_size + 1);
